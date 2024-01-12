@@ -50,12 +50,18 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // Read user by ID
-exports.getUserById = async (req, res) => {
+exports.redirectToEditPage = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findByPk(id);
+        const user = await User.findOne({
+            where: {
+                id: id
+            }
+        });
+
         if (user) {
-            res.status(200).json(user);
+            // Render halaman detail_update.handlebars dan kirimkan data pengguna
+            res.render('detail_update', { user });
         } else {
             res.status(404).json({ message: 'User not found' });
         }
@@ -64,6 +70,7 @@ exports.getUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 // Update user by ID
 exports.updateUserById = async (req, res) => {
@@ -76,7 +83,7 @@ exports.updateUserById = async (req, res) => {
             user.alamat = alamat;
             user.gender = gender;
             await user.save();
-            res.status(200).json(user);
+            res.redirect('/users'); // Redirect ke halaman index setelah update berhasil
         } else {
             res.status(404).json({ message: 'User not found' });
         }

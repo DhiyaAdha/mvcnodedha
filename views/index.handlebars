@@ -30,7 +30,7 @@
           <td>{{this.alamat}}</td>
           <td>{{this.gender}}</td>
           <td>
-            <button onclick="editUser('{{this.id_user}}')">Edit</button>
+            <button onclick="redirectToEdit('{{this.id}}')">Edit</button>
             <button onclick="deleteUser('{{this.id_user}}')">Delete</button>
           </td>
         </tr>
@@ -47,9 +47,9 @@
       window.location.href = '/create';
     }
 
-    function editUser(userId) {
+    function redirectToEdit(userId) {
       // Redirect ke halaman edit dengan membawa ID pengguna
-      window.location.href = '/edit/' + userId;
+      window.location.href = `/edit/${userId}`;
     }
 
     function deleteUser(userId) {
