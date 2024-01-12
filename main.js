@@ -10,7 +10,6 @@ const mysql = require('mysql2');
 const sequelize = require('./db-config.js');
 // console.log(sequelize);
 
-// const userController = require('./controllers/userController');
 // const session = require('express-session');
 
 //2. port express
@@ -21,24 +20,46 @@ const PORT = process.env.PORT || 4000;
 app.engine('handlebars', engine({ layoutsDir: __dirname + '/views', defaultLayout: false }));
 app.set('view engine', 'handlebars');
 
+// Middleware untuk mengakses req.body
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 /**
  * setup router
  * di server main.js
  */
 
 // pages start
-app.get('/', (req, res) => {
+app.get('/welcome', (req, res) => {
     res.send("hello world");
 });
 
-// page index
-// app.get('/users', (req, res) => {
-//     res.render('index', { 
-//         title: 'Pages User',
-//         subTitle: 'Page Users',
-//         additionalInfo: 'Data Monitoring User',
-//     });
+/**
+ * pemanggilan router
+ * connection dengan controllers
+ */
+const userRouter = require('./routes/router-user');
+app.use('/', userRouter);
+
+
+// app.get('/users', async  (req, res) => {
+//     try {
+//         const users = await sequelize.query('SELECT * FROM user ORDER BY id DESC', { type: sequelize.QueryTypes.SELECT });
+//         console.log(users);
+//         res.render('index', { 
+//             title: 'Pages User',
+//             subTitle: 'Page Users',
+//             additionalInfo: 'Data Monitoring User',
+//             users: users,
+//         });
+//     } catch (error) {
+//         console.error('Error fetching users:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
 // });
+
+/*
+*fungsi router awal(1)
 app.get('/users', async  (req, res) => {
     try {
         const users = await sequelize.query('SELECT * FROM user ORDER BY id DESC', { type: sequelize.QueryTypes.SELECT });
@@ -71,6 +92,8 @@ app.get('/detail_users', (req, res) => {
         subTitle: 'Page Detail',
         additionalInfo: 'Detail & Update User', });
 });
+
+*/
 
 // Port
 app.listen(PORT, () => {

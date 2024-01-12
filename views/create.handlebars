@@ -1,3 +1,4 @@
+<!-- create.handlebars -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,21 +7,21 @@
   <title>{{ title }}</title>
 </head>
 <body>
-  <h1>{{ sub-title }}</h1>
+  <h1>{{ subTitle }}</h1>
   <p>{{ additionalInfo }}</p>
 
-  <form>
-    <label for="userNo">Nomor Pengguna:</label>
-    <input type="text" id="userNo" name="userNo" readonly value="123"><br>
+  <form action="/create" method="POST"> <!-- Point the form action to the create route -->
+    <label for="nama">Nama Pengguna:</label>
+    <input type="text" id="nama" name="nama" required><br>
 
-    <label for="userName">Nama Pengguna:</label>
-    <input type="text" id="userName" name="userName" readonly value="John Doe"><br>
+    <label for="id_user">ID Pengguna:</label>
+    <input type="text" id="id_user" name="id_user" required><br>
 
-    <label for="userAddress">Alamat Pengguna:</label>
-    <input type="text" id="userAddress" name="userAddress" readonly value="123 Main Street"><br>
+    <label for="alamat">Alamat Pengguna:</label>
+    <input type="text" id="alamat" name="alamat" required><br>
 
-    <label for="registrationTime">Waktu Terdaftar:</label>
-    <input type="text" id="registrationTime" name="registrationTime" readonly value="2024-01-12 10:30 AM"><br>
+    <label for="gender">Gender Pengguna:</label>
+    <input type="text" id="gender" name="gender" required><br>
 
     <button type="submit">Submit</button>
   </form>

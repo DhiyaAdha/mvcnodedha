@@ -1,21 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql2');
+const userController = require('../controllers/userController.js');
 
-// display books page
-router.get('/', function(req, res, next) {
+router.get('/users', userController.getAllUsers);
+router.get('/create', userController.getCreatePage); 
+router.post('/create', userController.createUser);
 
-    dbConn.query('SELECT * FROM books ORDER BY id desc',function(err,rows)     {
-
-        if(err) {
-            req.flash('error', err);
-            // render to views/books/index.ejs
-            res.render('books',{data:''});
-        } else {
-            // render to views/books/index.ejs
-            res.render('books',{data:rows});
-        }
-    });
-});
+router.get('/users/:id', userController.getUserById);
+router.put('/users/:id', userController.updateUserById);
+router.delete('/users/:id', userController.deleteUserById);
 
 module.exports = router;

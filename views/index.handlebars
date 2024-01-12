@@ -1,3 +1,4 @@
+<!-- index.handlebars -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,29 +18,46 @@
         <th>ID User</th>
         <th>Alamat</th>
         <th>Gender</th>
+        <th>Actions</th> <!-- Tambah kolom untuk tombol aksi -->
       </tr>
     </thead>
     <tbody>
-      {{!-- <tr>
-        <td>1</td>
-        <td>John Doe</td>
-        <td>PM12456</td>
-        <td>123 Main Street</td>
-        <td>Male</td>
-      </tr> --}}
       {{#each users}}
         <tr>
-          {{!-- <td>{{add @index 1}}</td> --}}
           <td>{{@index}}</td>
           <td>{{this.nama}}</td>
           <td>{{this.id_user}}</td>
           <td>{{this.alamat}}</td>
           <td>{{this.gender}}</td>
+          <td>
+            <button onclick="editUser('{{this.id_user}}')">Edit</button>
+            <button onclick="deleteUser('{{this.id_user}}')">Delete</button>
+          </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
 
+  <button onclick="addUser()">Tambah</button>
+
+  <script>
+    // Tambahkan fungsi JavaScript untuk menangani tombol
+    function addUser() {
+      // Redirect ke halaman create
+      window.location.href = '/create';
+    }
+
+    function editUser(userId) {
+      // Redirect ke halaman edit dengan membawa ID pengguna
+      window.location.href = '/edit/' + userId;
+    }
+
+    function deleteUser(userId) {
+      // Tambahkan logika penghapusan pengguna sesuai kebutuhan
+      // Misalnya, bisa menggunakan metode fetch atau AJAX untuk memanggil fungsi delete di server
+      console.log('Delete user with ID:', userId);
+    }
+  </script>
   
 </body>
 </html>
