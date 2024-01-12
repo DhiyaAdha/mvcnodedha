@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <h1>{{ subTitle }}</h1>
+  <p>{{ additionalInfo }}</p>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>ID User</th>
+        <th>Alamat</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>PM12456</td>
+        <td>123 Main Street</td>
+        <td>Male</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>PM14456</td>
+        <td>456 Oak Avenue</td>
+        <td>Female</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Bob Johnson</td>
+        <td>LJMM23002</td>
+        <td>789 Pine Road</td>
+        <td>Male</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // Function to generate a random ID with a specified length
+    function generateRandomId(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return result;
+    }
+  </script>
+</body>
+</html>
