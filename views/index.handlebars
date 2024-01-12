@@ -24,14 +24,17 @@
     <tbody>
       {{#each users}}
         <tr>
-          <td>{{@index}}</td>
+          <td>{{add @index 1}}</td>
           <td>{{this.nama}}</td>
           <td>{{this.id_user}}</td>
           <td>{{this.alamat}}</td>
           <td>{{this.gender}}</td>
           <td>
             <button onclick="redirectToEdit('{{this.id}}')">Edit</button>
-            <button onclick="deleteUser('{{this.id_user}}')">Delete</button>
+            <form action="/users/delete/{{this.id}}" method="post">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit">Delete</button>
+            </form>
           </td>
         </tr>
       {{/each}}
@@ -41,23 +44,15 @@
   <button onclick="addUser()">Tambah</button>
 
   <script>
-    // Tambahkan fungsi JavaScript untuk menangani tombol
     function addUser() {
-      // Redirect ke halaman create
       window.location.href = '/create';
     }
 
     function redirectToEdit(userId) {
-      // Redirect ke halaman edit dengan membawa ID pengguna
       window.location.href = `/edit/${userId}`;
     }
 
-    function deleteUser(userId) {
-      // Tambahkan logika penghapusan pengguna sesuai kebutuhan
-      // Misalnya, bisa menggunakan metode fetch atau AJAX untuk memanggil fungsi delete di server
-      console.log('Delete user with ID:', userId);
-    }
+    
   </script>
-  
 </body>
 </html>

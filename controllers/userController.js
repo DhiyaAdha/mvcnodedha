@@ -131,8 +131,6 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-
-
 // Delete user by ID
 exports.deleteUserById = async (req, res) => {
     try {
@@ -140,7 +138,8 @@ exports.deleteUserById = async (req, res) => {
         const user = await User.findByPk(id);
         if (user) {
             await user.destroy();
-            res.status(204).send();
+            // Setelah berhasil dihapus, redirect ke halaman /users
+            res.redirect('/users');
         } else {
             res.status(404).json({ message: 'User not found' });
         }
@@ -149,3 +148,4 @@ exports.deleteUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+

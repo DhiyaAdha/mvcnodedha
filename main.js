@@ -53,6 +53,11 @@ const userRouter = require('./routes/router-user');
 app.use('/', userRouter);
 
 
+const handlebars = require('handlebars');
+const helpers = require('handlebars-helpers')();
+
+handlebars.registerHelper(helpers);
+
 // app.get('/users', async  (req, res) => {
 //     try {
 //         const users = await sequelize.query('SELECT * FROM user ORDER BY id DESC', { type: sequelize.QueryTypes.SELECT });
