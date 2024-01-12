@@ -8,7 +8,7 @@ router.post('/create', userController.createUser);
 
 // Rute untuk mengarahkan ke halaman edit berdasarkan ID
 router.get('/edit/:id', userController.redirectToEditPage);
-router.put('/users/:id', userController.updateUserById);
+router.post('/users/:id', userController.updateUser);
 
 router.delete('/users/:id', userController.deleteUserById);
 

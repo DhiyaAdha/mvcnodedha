@@ -5,6 +5,7 @@
 
 const User = require('../models/User.js');
 const sequelize = require('../db-config.js');
+// const { where } = require('sequelize');
 
 // Render create page
 exports.getCreatePage = (req, res) => {
@@ -75,28 +76,62 @@ exports.redirectToEditPage = async (req, res) => {
     }
 };
 
-
-
-// Update user by ID
-exports.updateUserById = async (req, res) => {
+// Update user 
+exports.updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nama, alamat, gender } = req.body;
-        const user = await User.findByPk(id);
-        if (user) {
-            user.nama = nama;
-            user.alamat = alamat;
-            user.gender = gender;
-            await user.save();
-            res.redirect('/users'); // Redirect ke halaman index setelah update berhasil
+        const { nama, alamat, gender, id_user } = req.body;
+
+        // Validasi id harus berupa angka
+        if (!Number.isInteger(Number(id))) {
+            return res.status(400).json({ error: 'Invalid id format' });
+        }
+
+        // Cek apakah ada data yang perlu diupdate
+        if (nama || alamat || gender || id_user) {
+            // Buat objek untuk menyimpan data yang ingin diupdate
+            const updateData = {};
+
+            if (nama) {
+                updateData.nama = nama;
+            }
+
+            if (alamat) {
+                updateData.alamat = alamat;
+            }
+
+            if (gender) {
+                updateData.gender = gender;
+            }
+
+            if (id_user) {
+                updateData.id_user = id_user;
+            }
+
+            // Melakukan update hanya jika ada data yang ingin diupdate
+            const [updatedRows] = await User.update(
+                updateData,
+                { where: { id: id } }
+            );
+
+            if (updatedRows > 0) {
+                // Jika berhasil diupdate, redirect ke halaman /users
+                return res.redirect('/users');
+            } else {
+                // Jika id tidak ditemukan
+                return res.status(404).json({ message: 'User not found' });
+            }
         } else {
-            res.status(404).json({ message: 'User not found' });
+            // Jika tidak ada data yang perlu diupdate, langsung redirect ke /users
+            return res.redirect('/users');
         }
     } catch (error) {
         console.error('Error updating user by ID:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+
 
 // Delete user by ID
 exports.deleteUserById = async (req, res) => {

@@ -4,6 +4,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../db-config.js');
 
 const User = sequelize.define('User', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   nama: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -11,7 +16,6 @@ const User = sequelize.define('User', {
   id_user: {
     type: DataTypes.STRING,
     allowNull: false,
-    primaryKey: true,
   },
   alamat: {
     type: DataTypes.STRING,
