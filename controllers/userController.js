@@ -50,6 +50,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // Read user by ID
+// Fungsi untuk menangani permintaan halaman edit user
 exports.redirectToEditPage = async (req, res) => {
     try {
         const { id } = req.params;
@@ -60,8 +61,11 @@ exports.redirectToEditPage = async (req, res) => {
         });
 
         if (user) {
+            // Mengambil seluruh data pengguna untuk ditampilkan pada halaman edit
+            const allUsers = await User.findAll();
+
             // Render halaman detail_update.handlebars dan kirimkan data pengguna
-            res.render('detail_update', { user });
+            res.render('detail_update', { user, allUsers });
         } else {
             res.status(404).json({ message: 'User not found' });
         }
@@ -70,6 +74,7 @@ exports.redirectToEditPage = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 
 // Update user by ID

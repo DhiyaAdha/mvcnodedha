@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const { engine } = require('express-handlebars');
+const { engine, hbs } = require('express-handlebars');
 const path = require('path');
 
 // Db connection
@@ -17,7 +17,18 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Set up handlebars as the template engine
-app.engine('handlebars', engine({ layoutsDir: __dirname + '/views', defaultLayout: false }));
+app.engine(
+    'handlebars',
+    engine({
+      layoutsDir: path.join(__dirname, '/views/layouts'),
+      defaultLayout: false,
+      helpers: {
+        getProperty: function (object, property) {
+          return object[property];
+        },
+      },
+    })
+  );
 app.set('view engine', 'handlebars');
 
 // Middleware untuk mengakses req.body
