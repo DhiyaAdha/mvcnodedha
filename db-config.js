@@ -1,3 +1,50 @@
+const { Sequelize } = require('sequelize');
+require('dotenv').config(); 
+
+/**
+ * config.sequelize
+ * untuk menerapkan query ORM di main.js
+ */
+// Konfigurasi koneksi MySQL
+const mysql = require('mysql2');
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
+
+// Mengecek koneksi MySQL menggunakan mysql2
+connection.connect((error) => {
+  if (error) {
+    console.error('Error connecting to MySQL database:', error);
+  } else {
+    console.log('Connected to MySQL database!');
+  }
+});
+
+// Sequelize
+const sequelize = new Sequelize({
+  dialect: 'mysql',
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
+
+// Mengecek koneksi Sequelize
+sequelize.authenticate()
+  .then(() => {
+    console.log('Sequelize connection has been established successfully.');
+  })
+  .catch((error) => {
+    console.error('Unable to connect to the database:', error);
+  });
+
+module.exports = sequelize;
+
+
+/*
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -27,12 +74,4 @@ connection.on('close', (err) => {
 connection.on('end', () => {
   console.log('MySQL connection ended');
 });
-
-// const { Sequelize } = require('sequelize');
-
-// const sequelize = new Sequelize('UserDB', null, null, {
-//   host: 'localhost',
-//   dialect: 'mysql',
-// });
-
-// module.exports = sequelize;
+*/
