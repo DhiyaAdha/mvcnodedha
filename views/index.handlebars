@@ -10,6 +10,8 @@
   <h1>{{ subTitle }}</h1>
   <p>{{ additionalInfo }}</p>
 
+  <button onclick="addUser()" style="margin-bottom: 20px;">Tambah User</button>
+
   <table border="1">
     <thead>
       <tr>
@@ -30,6 +32,7 @@
           <td>{{this.alamat}}</td>
           <td>{{this.gender}}</td>
           <td>
+            <button onclick="redirectToDetail('{{this.id}}')">Details</button>
             <button onclick="redirectToEdit('{{this.id}}')">Edit</button>
             <form action="/users/delete/{{this.id}}" method="post">
               <input type="hidden" name="_method" value="DELETE">
@@ -41,11 +44,14 @@
     </tbody>
   </table>
 
-  <button onclick="addUser()">Tambah</button>
 
   <script>
     function addUser() {
       window.location.href = '/create';
+    }
+
+    function redirectToDetail(userId) {
+      window.location.href = `/detail/${userId}`;
     }
 
     function redirectToEdit(userId) {

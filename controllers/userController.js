@@ -37,7 +37,7 @@ exports.createUser = async (req, res) => {
 // Read all users
 exports.getAllUsers = async (req, res) => {
   try {
-      const users = await sequelize.query('SELECT * FROM user ORDER BY id DESC', { type: sequelize.QueryTypes.SELECT });
+      const users = await sequelize.query('SELECT * FROM user ORDER BY id ASC', { type: sequelize.QueryTypes.SELECT });
       res.render('index', { 
           title: 'Pages User',
           subTitle: 'Page Users',
@@ -50,7 +50,28 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-// Read user by ID
+// Fungsi untuk menangani permintaan halaman detail user
+exports.redirectToDetailPage = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (user) {
+            // Render halaman detail.handlebars dan kirimkan data pengguna
+            res.render('detail', { user });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching user by ID:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 // Fungsi untuk menangani permintaan halaman edit user
 exports.redirectToEditPage = async (req, res) => {
     try {
@@ -66,7 +87,7 @@ exports.redirectToEditPage = async (req, res) => {
             const allUsers = await User.findAll();
 
             // Render halaman detail_update.handlebars dan kirimkan data pengguna
-            res.render('detail_update', { user, allUsers });
+            res.render('update', { user, allUsers });
         } else {
             res.status(404).json({ message: 'User not found' });
         }

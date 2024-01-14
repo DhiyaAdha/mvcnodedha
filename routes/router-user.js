@@ -7,10 +7,10 @@ router.get('/create', userController.getCreatePage);
 router.post('/create', userController.createUser);
 
 // Rute untuk mengarahkan ke halaman edit berdasarkan ID
+router.get('/detail/:id', userController.redirectToDetailPage);
 router.get('/edit/:id', userController.redirectToEditPage);
 router.post('/users/:id', userController.updateUser);
 // Rute untuk menghapus pengguna berdasarkan ID
-// router.delete('/users/:id', userController.deleteUserById);
 router.post('/users/delete/:id', userController.deleteUserById);
 
 module.exports = router;

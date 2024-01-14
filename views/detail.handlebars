@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Detail</title>
+</head>
+<body>
+  <h1>User Detail</h1>
+
+  <form action="/users" method="GET">
+    <label>Card ID : {{getProperty user 'id_user'}}</label>
+    <br>
+
+    <label for="nama">Nama Pengguna:</label>
+    <input type="text" id="nama" name="nama" value="{{getProperty user 'nama'}}" readonly><br>
+
+    <label for="alamat">Alamat Pengguna:</label>
+    <input type="text" id="alamat" name="alamat" value="{{getProperty user 'alamat'}}" readonly><br>
+
+    <label for="gender">Gender Pengguna:</label>
+    <input type="text" id="gender" name="gender" value="{{getProperty user 'gender'}}" readonly><br>
+
+    <!-- Tambahkan tombol "Edit" menggunakan JavaScript -->
+    <button type="button" onclick="redirectToEdit('{{getProperty user 'id'}}')">Edit</button>
+
+    <button type="submit" name="action" value="back">Back to Users</button>
+  </form>
+
+  <script>
+    function redirectToEdit(userId) {
+      window.location.href = `/edit/${userId}`;
+    }
+  </script>
+</body>
+</html>

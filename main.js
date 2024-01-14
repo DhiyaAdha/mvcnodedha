@@ -48,7 +48,7 @@ app.use(express.json());
  */
 
 // pages start
-app.get('/welcome', (req, res) => {
+app.get('/', (req, res) => {
     res.send("hello world");
 });
 
