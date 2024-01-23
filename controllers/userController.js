@@ -1,3 +1,5 @@
+//before update data-tables
+
 /**
  * (1) fungsi crud user
  * dengan routing dan views yang diaraskan
@@ -9,11 +11,11 @@ const sequelize = require('../db-config.js');
 
 // Render create page
 exports.getCreatePage = (req, res) => {
-  res.render('create', {
-      title: 'Create User',
-      subTitle: 'Create User Page',
-      additionalInfo: 'Tambah User',
-  });
+    res.render('create', {
+        title: 'Create User',
+        subTitle: 'Create User Page',
+        additionalInfo: 'Tambah User',
+    });
 };
 
 // Create user
@@ -36,18 +38,18 @@ exports.createUser = async (req, res) => {
 
 // Read all users
 exports.getAllUsers = async (req, res) => {
-  try {
-      const users = await sequelize.query('SELECT * FROM user ORDER BY id ASC', { type: sequelize.QueryTypes.SELECT });
-      res.render('index', { 
-          title: 'Pages User',
-          subTitle: 'Page Users',
-          additionalInfo: 'Data Monitoring User',
-          users: users,
-      });
-  } catch (error) {
-      console.error('Error fetching users:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-  }
+    try {
+        const users = await sequelize.query('SELECT * FROM user ORDER BY id ASC', { type: sequelize.QueryTypes.SELECT });
+        res.render('index', {
+            title: 'Pages User',
+            subTitle: 'Page Users',
+            additionalInfo: 'Data Monitoring User',
+            users: users,
+        });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 };
 
 // Fungsi untuk menangani permintaan halaman detail user
@@ -169,4 +171,27 @@ exports.deleteUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+/**
+ * fungsi custom ui
+ */
+exports.getCustomUiPage = async (req, res) => {
+    try {
+        const user_call = await sequelize.query('SELECT * FROM user ORDER BY id ASC', { type: sequelize.QueryTypes.SELECT });
+        // Cek apakah permintaan datang dari AJAX
+        if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+            // Jika ya, kirim respons JSON
+            res.json({ data: user_call });
+        } else {
+            // Jika tidak, render halaman 'customUi'
+            res.render('customUi', {
+                data: user_call
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 
