@@ -10,8 +10,8 @@ const Barang = sequelize.define('Barang', {
     primaryKey: true,
   },
   nama_barang: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.ENUM('barang1', 'barang2'),
+    allowNull: true,
   },
   qty_barang: {
     type: DataTypes.INTEGER,

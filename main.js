@@ -29,6 +29,9 @@ app.engine(
         getProperty: function (object, property) {
           return object[property];
         },
+        stringify: function (context) {
+          return JSON.stringify(context);
+        },
       },
     })
   );
@@ -59,7 +62,7 @@ app.get('/', (req, res) => {
 const userRouter = require('./routes/router-user');
 const barangRouter = require('./routes/router-barang');
 app.use('/', userRouter);
-app.use('/', barangRouter);
+app.use('/barang', barangRouter);
 
 // Port
 app.listen(PORT, () => {

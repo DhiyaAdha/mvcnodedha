@@ -1,11 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Pie Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #chart-container {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>{{ subTitle }}</h1>
+    <div>
+        <h1>Monthly Pie Chart</h1>
+    </div>
+
+    <div id="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Mendapatkan data dari server
+        const xValues = {{{ stringify xValues }}};
+        const yValues = {{{ stringify yValues }}};
+        const barColors = {{{ stringify barColors }}};
+
+        // Memastikan data diterima dengan benar
+        if (Array.isArray(xValues) && Array.isArray(yValues) && Array.isArray(barColors) && xValues.length === yValues.length) {
+            // Membuat pie chart dengan Chart.js
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Total Kuantitas per Bulan"
+                    }
+                }
+            });
+        } else {
+            console.error("Data yang tidak valid diterima dari server. Harap periksa kode sisi server Anda.");
+        }
+    </script>
 </body>
+
 </html>
