@@ -13,7 +13,7 @@
 <body>
     {{!-- <h1>{{ subTitle }}</h1> --}}
     {{!-- <p>{{ additionalInfo }}</p> --}}
-
+    <button onclick="backHome()" style="margin: 20px 20px;">Back Home</button>
     <div style="margin: 20px;">
         {{!-- data-table --}}
         <table id="example" class="display" style="width:100%">
@@ -95,6 +95,11 @@
                 ]
             });
         });
+    </script>
+    <script>
+        function backHome() {
+      window.location.href = '/users';
+    }
     </script>
 </body>
 {{!-- sebelum tambah chart js --}}

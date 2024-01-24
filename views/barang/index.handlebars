@@ -33,6 +33,8 @@
 </head>
 
 <body>
+    <button onclick="backHome()" style="margin: 20px 20px;">Back Home</button>
+
     <div>
         <h1>Monthly Pie Chart</h1>
     </div>
@@ -47,9 +49,11 @@
         const yValues = {{{ stringify yValues }}};
         const barColors = {{{ stringify barColors }}};
 
+
         // Memastikan data diterima dengan benar
         if (Array.isArray(xValues) && Array.isArray(yValues) && Array.isArray(barColors) && xValues.length === yValues.length) {
             // Membuat pie chart dengan Chart.js
+
             new Chart("myChart", {
                 type: "pie",
                 data: {
@@ -70,6 +74,13 @@
             console.error("Data yang tidak valid diterima dari server. Harap periksa kode sisi server Anda.");
         }
     </script>
+
+    <script>
+        function backHome() {
+            window.location.href = '/users';
+        }
+    </script>
+
 </body>
 
 </html>

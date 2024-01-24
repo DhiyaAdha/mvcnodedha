@@ -11,6 +11,8 @@
   <p>{{ additionalInfo }}</p>
 
   <button onclick="addUser()" style="margin-bottom: 20px;">Tambah User</button>
+  <button onclick="dataTableUser()" style="margin-bottom: 20px;">Fitur Datatable User</button>
+  <button onclick="dataPieChartBarangMonthly()" style="margin-bottom: 20px;">Fitur Monitoring Barang</button>
 
   <table border="1">
     <thead>
@@ -58,6 +60,13 @@
       window.location.href = `/edit/${userId}`;
     }
 
+    function dataTableUser() { 
+      window.location.href = `/customui_datatable`;
+    }
+
+    function dataPieChartBarangMonthly () { 
+      window.location.href = `/barang/chart`;
+    }
     
   </script>
 </body>
