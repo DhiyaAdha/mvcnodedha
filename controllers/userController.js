@@ -194,4 +194,12 @@ exports.getCustomUiPage = async (req, res) => {
     }
 };
 
+exports.getCustomUiChart = async (req, res) => { 
+    res.render('customchart_data', {
+        title: 'Page Chart',
+        subTitle: 'Data ChartPage',
+        additionalInfo: 'Data Category Barang',
+    });
+ };
+
 

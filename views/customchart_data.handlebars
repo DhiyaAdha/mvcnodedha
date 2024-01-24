@@ -1,1 +1,58 @@
 {{!-- sebelum tamabh chart js --}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.umd.js">
+    </script>
+</head>
+
+<body>
+    <h1>{{ subTitle }}</h1>
+    <p>{{ additionalInfo }}</p>
+
+    <div style="margin: 40px;">
+        <div>
+            <h3>Chart JS Bar Chart </h3>
+            <canvas id="myChart" style="width:auto;max-width:600px;height: auto;">
+            </canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        const yValues = [55, 49, 44, 24, 15];
+        const barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+        ];
+
+        new Chart("myChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "World Wide Wine Production 2018"
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

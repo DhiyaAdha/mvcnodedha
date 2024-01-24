@@ -49,7 +49,7 @@ app.use(express.json());
 
 // pages start
 app.get('/', (req, res) => {
-    res.send("hello world");
+    res.send("Page Monitoring");
 });
 
 /**
@@ -57,7 +57,9 @@ app.get('/', (req, res) => {
  * connection dengan controllers
  */
 const userRouter = require('./routes/router-user');
+const barangRouter = require('./routes/router-barang');
 app.use('/', userRouter);
+app.use('/', barangRouter);
 
 // Port
 app.listen(PORT, () => {
