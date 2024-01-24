@@ -184,7 +184,7 @@ exports.getCustomUiPage = async (req, res) => {
             res.json({ data: user_call });
         } else {
             // Jika tidak, render halaman 'customUi'
-            res.render('customUi', {
+            res.render('customUi_datatable', {
                 data: user_call
             });
         }

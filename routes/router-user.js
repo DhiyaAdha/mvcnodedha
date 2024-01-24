@@ -12,6 +12,6 @@ router.get('/detail/:id', userController.redirectToDetailPage);
 router.get('/edit/:id', userController.redirectToEditPage);
 router.post('/users/:id', userController.updateUser);
 router.post('/users/delete/:id', userController.deleteUserById);
-router.get('/customui', userController.getCustomUiPage);
+router.get('/customui_datatable', userController.getCustomUiPage);
 
 module.exports = router;
